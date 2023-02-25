@@ -38,8 +38,8 @@ function Example() {
                 <NavbarToggler onClick={toggleNavbar} className="me-2" />
                 <Collapse isOpen={!collapsed} navbar>
                     <Nav navbar>
-                        <NavItem>
-                            <NavLink >Components</NavLink>
+                        <NavItem onClick={() => navigate("/newsapp/create")}>
+                            <NavLink >Post Article</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink onClick={() => { dispatch(logout()); navigate("/newsapp") }}>
