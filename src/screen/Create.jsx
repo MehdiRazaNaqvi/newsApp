@@ -1,26 +1,18 @@
+import "../style/create.css"
+
+import { Row, Col, Card, CardText, CardTitle, Button } from "reactstrap"
 
 
-
-
-
-import "../style/waitlist.css"
-import "../style/app.css"
-
-import Download1 from "../images/download1.png"
-import Download2 from "../images/download2.png"
-import Mobile1 from "../images/mobile1.png"
-import Waitlist from "../images/waitlist2.png"
-import { Form, FormGroup, Input, Button, FormFeedback } from "reactstrap"
-
-import { useEffect, useState } from "react"
-
-import { toast } from "react-toastify"
-import 'react-toastify/dist/ReactToastify.css';
+import Navbar from "../components/navbar"
 import { useNavigate } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { api_url } from "../config/api"
-import { userLogin } from "../store/counterslice"
+import { useEffect } from "react"
 import axios from "axios"
+import { api_url } from "../config/api"
+import { useDispatch, useSelector } from "react-redux"
+import { toast } from "react-toastify"
+import { setArticles } from "../store/counterslice"
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 
 
@@ -28,97 +20,41 @@ import axios from "axios"
 const App = () => {
 
 
-
-
-    const [email, set_email] = useState('');
-    const [password, set_password] = useState('');
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-
-  
     const state = useSelector(state => state.counter)
 
-    const loginSuccess = (res) => {
-        dispatch(userLogin({ jwt: res.data.jwt, user: res.data.user }))
-        navigate("/newsapp/feed")
-    }
 
 
-    const userAuthenticate = () => {
 
-
-        setLoading(true)
-        axios.post(`${api_url}/auth/local`, { identifier: email, password })
-            .then(res => { res.data?.jwt ? loginSuccess(res) : toast.error("Something went wrong..."); setLoading(false) })
-            .catch(err => { toast.error("Authentication failed"); setLoading(false) })
-
-
-    }
-
-
-    const [isLoading, setLoading] = useState(false)
-
-    console.log(state)
-
-
-    useEffect(() => {
-        if (state.currentUser.jwt) { navigate("/newsapp/feed") }
-    }, [])
-
-
-    
     return (
 
-        <div style={{ height: "100vh" }} className="waitlist_base foresome_screen1">
 
-            <div className="screen1_left">
+        <div className="news_page_base" >
 
+            <Navbar />
 
-                <h1 className="screen1_heading">Join the waitlist and be the first to be notified once we've launched</h1>
+            <div className="create_article_base">
 
-
-                <Form onSubmit={(e) => { e.preventDefault(); userAuthenticate() }} className="waitlist_input">
-
-
-                    <FormGroup className="formgroup">
-
-                        <Input type="email" invalid={email != '' ? validateEmail(email) ? false : true : false} required onChange={(e) => set_email(e.target.value)} className="input" placeholder="Enter Email" />
-
-                        <Input required onChange={(e) => set_password(e.target.value)} className="input" placeholder="Enter Password" />
+                <Editor
 
 
-
-                    </FormGroup>
-
-                    <Button disabled={isLoading} type="submit" color="success" className="button_waitlist">Sign in</Button>
-
-
-                </Form>
-
-
-            </div>
+                    // editorState={editorState}
+                    toolbarClassName="toolbarClassName"
+                    wrapperClassName="wrapperClassName"
+                    editorClassName="editorClassName"
+                // onEditorStateChange={this.onEditorStateChange}
+                />
 
 
-            <div className="screen1_right">
-
-                <img style={{ height: "80%" }} src={Waitlist} className="mobile1" />
-
-            </div>
-
-
-            <div className="waitlist_right">
 
             </div>
 
         </div>
-
-
     )
 
 }
-
-
 
 
 

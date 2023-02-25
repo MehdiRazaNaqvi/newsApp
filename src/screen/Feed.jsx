@@ -29,12 +29,30 @@ const App = () => {
             .then(res => { if (res.data?.data) { dispatch(setArticles(res.data?.data)) } else { toast.error("Something went wrong") } })
             .catch(err => toast.error("Something went wrong"))
 
-    }, [state.articles])
+    }, [])
 
 
 
 
+    const calculate_days = (date) => {
+        const pastDate = new Date(date);
+        const currentDate = new Date();
 
+        const timeDifference = currentDate.getTime() - pastDate.getTime();
+
+
+        // const seconds = Math.floor(timeDifference / 1000);
+        // const minutes = Math.floor(seconds / 60);
+        // const hours = Math.floor(minutes / 60);
+        // const days = Math.floor(timeDifference / 24*60*60*1000);
+        const days = Math.floor(timeDifference / (24 * 60 * 60 * 1000));
+        // console.log(`${days}`);
+        if(days == 0) {return ("today")}
+        
+        else{
+            return (`${days} days ago`)
+        }
+    }
 
     return (
 
@@ -45,21 +63,23 @@ const App = () => {
 
             <div className="news_page_articles">
 
+                {state.articles.length == 0 ?
 
+                    <span className="no_articles">No Articles</span>
 
-                {
-                    state.articles.map((v, i) =>
+                    :
 
-                        <Col key={i} id={`first_article${i}`} sm="12">
+                    <>
+                        <Col id="first_article" sm="12">
 
-                            <Card body>
-                                <CardTitle onClick={() => navigate("/newsapp/article")} tag="h5" className="max_lines1">
-                                    {v.attributes.title}
+                            <Card onClick={() => navigate(`/newsapp/article/${state.articles[0].id}`)} style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
+                                <CardTitle tag="h5" className="max_lines1">
+                                    {state.articles[0].attributes.title}
                                 </CardTitle>
 
 
                                 <CardText className="max_lines2">
-                                    {v.attributes.description}
+                                    {state.articles[0].attributes.description}
 
                                 </CardText>
 
@@ -67,10 +87,10 @@ const App = () => {
 
                                     <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
                                         <img className="author_img_feed_page" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSaQlO7ukqmBVlJd_ToyW9nDJXU8UCmpCjGYjhK79PIA&s" alt="" />
-                                        <h6>{v.attributes?.author?.data[0]?.attributes?.username}</h6>
+                                        <h6>{state.articles[0].attributes?.author?.data?.attributes?.username}</h6>
                                     </span>
 
-                                    <span style={{ color: "gray" }}>2 mins ago</span>
+                                    <span style={{ color: "gray" }}>{calculate_days(state.articles[0].attributes.createdAt)}</span>
 
                                 </Button>
 
@@ -80,62 +100,46 @@ const App = () => {
                         </Col>
 
 
+                        {state.articles.slice(1).map((v, i) =>
 
-                    )}
+                            <Col key={i} sm="12">
 
-                {/* <Row>
-                    <Col sm="6">
-                        <Card body>
-                            <CardTitle tag="h5" className="max_lines1">
-                                Special Title Treatment
-                            </CardTitle>
-                            <CardText className="max_lines2">
-                                With supporting text below as a natural lead-in to additional content.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ducimus sint laudantium accusantium dolore, id odio magni harum fugiat quisquam quo nemo ut voluptatibus at cum assumenda tempore dolorum itaque!
-
-                            </CardText>
-                            <Button color="light" className="feed_page_author_bar">
-
-                                <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
-                                    <img className="author_img_feed_page" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSaQlO7ukqmBVlJd_ToyW9nDJXU8UCmpCjGYjhK79PIA&s" alt="" />
-                                    <h6>Syed Mehdi Raza Naqvi</h6>
-                                </span>
-
-                                <span style={{ color: "gray" }}>2 mins ago</span>
-
-                            </Button>
+                                <Card onClick={() => navigate(`/newsapp/article/${v.id}`)} style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
+                                    <CardTitle tag="h5" className="max_lines1">
+                                        {v.attributes.title}
+                                    </CardTitle>
 
 
-                        </Card>
-                    </Col>
+                                    <CardText className="max_lines2">
+                                        {v.attributes.description}
+
+                                    </CardText>
+
+                                    <Button color="light" className="feed_page_author_bar">
+
+                                        <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
+                                            <img className="author_img_feed_page" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSaQlO7ukqmBVlJd_ToyW9nDJXU8UCmpCjGYjhK79PIA&s" alt="" />
+                                            <h6>{v.attributes?.author?.data?.attributes?.username}</h6>
+                                        </span>
+
+                                        <span style={{ color: "gray" }}>{calculate_days(state.articles[0].attributes.createdAt)}</span>
+
+                                    </Button>
 
 
-                    <Col sm="6">
-                        <Card body>
-                            <CardTitle tag="h5" className="max_lines1">
-                                Special Title Treatment
-                            </CardTitle>
-                            <CardText className="max_lines2">
-                                With supporting text below as a natural lead-in to additional content.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ducimus sint laudantium accusantium dolore, id odio magni harum fugiat quisquam quo nemo ut voluptatibus at cum assumenda tempore dolorum itaque!
+                                </Card>
 
-                            </CardText>
-                            <Button color="light" className="feed_page_author_bar">
-
-                                <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
-                                    <img className="author_img_feed_page" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSaQlO7ukqmBVlJd_ToyW9nDJXU8UCmpCjGYjhK79PIA&s" alt="" />
-                                    <h6>Syed Mehdi Raza Naqvi</h6>
-                                </span>
-
-                                <span style={{ color: "gray" }}>2 mins ago</span>
-
-                            </Button>
+                            </Col>
 
 
-                        </Card>
-                    </Col>
-                </Row>
- */}
+
+                        )}
+                    </>
+
+                }
+
+
+
 
 
 

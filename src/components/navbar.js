@@ -24,6 +24,10 @@ function Example() {
 
     const toggleNavbar = () => setCollapsed(!collapsed);
 
+
+    
+
+
     return (
 
 
@@ -35,7 +39,11 @@ function Example() {
                     <img className='author_img_feed_page' style={{ marginRight: "1rem" }} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSaQlO7ukqmBVlJd_ToyW9nDJXU8UCmpCjGYjhK79PIA&s' />
                     {state.currentUser.username}
                 </NavbarBrand>
+
+
                 <NavbarToggler onClick={toggleNavbar} className="me-2" />
+
+
                 <Collapse isOpen={!collapsed} navbar>
                     <Nav navbar>
                         <NavItem onClick={() => navigate("/newsapp/create")}>

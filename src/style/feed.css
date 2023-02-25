@@ -40,7 +40,7 @@
 
 .max_lines2 {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     /* Set the maximum number of characters to 20 */
     /* max-width: 40ch; */
@@ -91,8 +91,28 @@
 
 
 
-#first_article0{
+#first_article {
 
     grid-column: 1/3;
-    grid-row: 1/3;
+    /* grid-row: 1/3; */
+}
+
+
+
+
+.no_articles {
+
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: gray;
+    font-size: 1.3rem;
+
+    grid-column: 1/3;
+
+    margin-top: 30%;
+
 }
