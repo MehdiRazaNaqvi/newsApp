@@ -3,7 +3,7 @@
 
 .article_display_base {
     width: 70%;
-    /* background-color: pink; */
+
     height: min-content;
 
     margin-top: 5rem;
@@ -81,9 +81,9 @@
 
 
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 500px) {
     .article_display_base {
-        width: 100%;
+        width: 95%;
 
     }
 
