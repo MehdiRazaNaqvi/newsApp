@@ -8,6 +8,7 @@ import Thankyou from "./screen/Thankyou"
 import Feed from "./screen/Feed"
 import Article from "./screen/Article"
 import Create from "./screen/Create"
+import Author from "./screen/Author"
 
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
@@ -32,6 +33,7 @@ const App = () => {
                     <Route element={<Feed />} path="/newsapp/feed" />
                     <Route element={<Article />} path="/newsapp/article/:id" />
                     <Route element={<Create />} path="/newsapp/create" />
+                    <Route element={<Author />} path="/newsapp/author/:id" />
 
 
 

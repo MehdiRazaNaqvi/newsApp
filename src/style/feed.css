@@ -26,7 +26,7 @@
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-columns: auto auto;
+
     place-items: center;
 
     row-gap: 2rem;
@@ -72,8 +72,8 @@
 
 
 .author_img_feed_page {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
 
     border-radius: 50%;
 }
@@ -98,6 +98,9 @@
 }
 
 
+#articles_half {
+    /* grid-column: 1/2; */
+}
 
 
 .no_articles {

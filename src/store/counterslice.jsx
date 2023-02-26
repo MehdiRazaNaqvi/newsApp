@@ -15,7 +15,9 @@ const initialState = {
   },
 
 
-  articles: []
+  articles: [],
+
+  users: [],
 
 }
 
@@ -59,6 +61,12 @@ export const counterSlice = createSlice({
     },
 
 
+    setAuthors: (state, action) => {
+
+      state.users = action.payload
+
+    },
+
 
 
   },
@@ -72,6 +80,6 @@ export const counterSlice = createSlice({
 
 
 
-export const { userLogin, logout, setArticles } = counterSlice.actions
+export const { userLogin, logout, setArticles, setAuthors } = counterSlice.actions
 
 export default counterSlice.reducer

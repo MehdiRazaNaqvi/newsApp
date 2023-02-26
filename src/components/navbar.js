@@ -10,6 +10,7 @@ import {
     NavItem,
     NavLink,
 } from 'reactstrap';
+import { img_url } from '../config/api';
 import { logout } from "../store/counterslice"
 
 
@@ -25,9 +26,10 @@ function Example() {
     const toggleNavbar = () => setCollapsed(!collapsed);
 
 
+    const pic = state.users.filter(v => v.id == state?.currentUser?.id)[0]?.image?.formats?.large?.url
+
+
     
-
-
     return (
 
 
@@ -36,7 +38,7 @@ function Example() {
             <Navbar color="light" style={{ width: "100%" }} light>
 
                 <NavbarBrand className="me-auto">
-                    <img className='author_img_feed_page' style={{ marginRight: "1rem" }} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSaQlO7ukqmBVlJd_ToyW9nDJXU8UCmpCjGYjhK79PIA&s' />
+                    <img className='author_img_feed_page' style={{ marginRight: "1rem" }} src={`${img_url}${pic}`} />
                     {state.currentUser.username}
                 </NavbarBrand>
 
@@ -46,9 +48,8 @@ function Example() {
 
                 <Collapse isOpen={!collapsed} navbar>
                     <Nav navbar>
-                        <NavItem onClick={() => navigate("/newsapp/create")}>
-                            <NavLink >Post Article</NavLink>
-                        </NavItem>
+
+
                         <NavItem>
                             <NavLink onClick={() => { dispatch(logout()); navigate("/newsapp") }}>
                                 Logout
