@@ -81,8 +81,8 @@ const App = () => {
                 }
                 <span className="author_profile_info">
 
-                    <span className="author_profile_name">{user?.username}</span>
-                    <span className="author_profile_email">{user?.email}</span>
+                    <span className="author_profile_name max_lines1">{user?.username}</span>
+                    <span className="author_profile_email max_lines1">{user?.email}</span>
                 </span>
 
 

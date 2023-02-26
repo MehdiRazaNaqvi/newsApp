@@ -119,3 +119,68 @@
     margin-top: 30%;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 1000px) {
+    .news_page_articles {
+        width: 90%;
+
+
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+
+
+
+
+
+@media only screen and (max-width: 500px) {
+    .news_page_articles {
+        width: 100%;
+
+
+    }
+
+    .user_name_and_status {
+        font-size: small;
+    }
+
+}

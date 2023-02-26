@@ -75,7 +75,7 @@ const App = () => {
     }, [])
 
 
-    
+
     return (
 
         <div style={{ height: "100vh" }} className="waitlist_base foresome_screen1">

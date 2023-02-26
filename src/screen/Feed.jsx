@@ -102,10 +102,10 @@ const App = () => {
                                                 :
                                                 <AiOutlineUser size={40} />
                                         }
-                                        <h6 style={{ margin: "0px", marginLeft: "0.5rem", padding: "0px" }}>{state.articles[0].attributes?.author?.data?.attributes?.username}</h6>
+                                        <h6 className="user_name_and_status max_lines1" style={{ margin: "0px", marginLeft: "0.5rem", padding: "0px" }}>{state.articles[0].attributes?.author?.data?.attributes?.username}</h6>
                                     </span>
 
-                                    <span style={{ color: "gray" }}>{calculate_days(state.articles[0].attributes.createdAt)}</span>
+                                    <span className="user_name_and_status" style={{ color: "gray" }}>{calculate_days(state.articles[0].attributes.createdAt)}</span>
 
                                 </Button>
 
@@ -140,10 +140,10 @@ const App = () => {
                                                     :
                                                     <AiOutlineUser size={40} />
                                             }
-                                            <h6 style={{ margin: "0px", marginLeft: "0.5rem", padding: "0px" }}>{v.attributes?.author?.data?.attributes?.username}</h6>
+                                            <h6 className="user_name_and_status max_lines1" style={{ margin: "0px", marginLeft: "0.25rem", padding: "0px" }}>{v.attributes?.author?.data?.attributes?.username}</h6>
                                         </span>
 
-                                        <span style={{ color: "gray" }}>{calculate_days(v.attributes.createdAt)}</span>
+                                        <span className="user_name_and_status" style={{ color: "gray" }}>{calculate_days(v.attributes.createdAt)}</span>
 
                                     </Button>
 

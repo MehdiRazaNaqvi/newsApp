@@ -12,6 +12,8 @@ import {
 } from 'reactstrap';
 import { img_url } from '../config/api';
 import { logout } from "../store/counterslice"
+import { AiOutlineUser } from "react-icons/ai"
+import { MdArticle } from "react-icons/md"
 
 
 function Example() {
@@ -29,7 +31,7 @@ function Example() {
     const pic = state.users.filter(v => v.id == state?.currentUser?.id)[0]?.image?.formats?.large?.url
 
 
-    
+
     return (
 
 
@@ -37,26 +39,32 @@ function Example() {
         <div style={{ width: "100%" }}>
             <Navbar color="light" style={{ width: "100%" }} light>
 
-                <NavbarBrand className="me-auto">
-                    <img className='author_img_feed_page' style={{ marginRight: "1rem" }} src={`${img_url}${pic}`} />
-                    {state.currentUser.username}
+                <NavbarBrand className="me-auto max_lines1" style={{ margin: "0px", padding: "0px", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                    {/* {pic ? */}
+
+                        {/* <img className='author_img_feed_page' style={{ marginRight: "1rem" }} src={`${img_url}${pic}`} /> */}
+                        {/* : */}
+                        <MdArticle size={40} />
+                    
+                    {/* } */}
+                    {/* {state?.currentUser?.username} */}
                 </NavbarBrand>
 
 
-                <NavbarToggler onClick={toggleNavbar} className="me-2" />
+                {/* <NavbarToggler onClick={toggleNavbar} className="me-2" /> */}
 
 
-                <Collapse isOpen={!collapsed} navbar>
+                {/* <Collapse isOpen={!collapsed} navbar>
                     <Nav navbar>
 
-
+                    onClick={() => { dispatch(logout()); navigate("/newsapp") }}    
                         <NavItem>
-                            <NavLink onClick={() => { dispatch(logout()); navigate("/newsapp") }}>
-                                Logout
+                            <NavLink >
+                                Login
                             </NavLink>
                         </NavItem>
                     </Nav>
-                </Collapse>
+                </Collapse> */}
             </Navbar>
         </div>
     );

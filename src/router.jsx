@@ -28,9 +28,9 @@ const App = () => {
 
                     {/* <Route element={<Home />} path="/newsapp" /> */}
 
-                    <Route element={<Waitlist />} path="/newsapp" />
+                    {/* <Route element={<Waitlist />} path="/newsapp" /> */}
                     <Route element={<Thankyou />} path="/newsapp/thankyou" />
-                    <Route element={<Feed />} path="/newsapp/feed" />
+                    <Route element={<Feed />} path="/newsapp" />
                     <Route element={<Article />} path="/newsapp/article/:id" />
                     <Route element={<Create />} path="/newsapp/create" />
                     <Route element={<Author />} path="/newsapp/author/:id" />
