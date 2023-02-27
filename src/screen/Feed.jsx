@@ -1,17 +1,18 @@
 import "../style/feed.css"
 
-import { Row, Col, Card, CardText, CardTitle, Button } from "reactstrap"
+import { Row, Col, Card, CardText, CardTitle, Button, Spinner } from "reactstrap"
 
 
 import Navbar from "../components/navbar"
 import { useNavigate } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import { api_url, img_url } from "../config/api"
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import { setArticles, setAuthors } from "../store/counterslice"
 import { AiOutlineUser } from "react-icons/ai"
+
 
 
 const App = () => {
@@ -22,22 +23,22 @@ const App = () => {
 
     const state = useSelector(state => state.counter)
 
-
-    console.log(state)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        setLoading(true)
         axios.get(`${api_url}/news?populate=author&populate=author.image`)
-            .then(res => { if (res.data?.data) { dispatch(setArticles(res.data?.data)) } else { toast.error("Something went wrong") } })
-            .catch(err => toast.error("Something went wrong"))
+            .then(res => { setLoading(false); if (res.data?.data) { dispatch(setArticles(res.data?.data)) } else { toast.error("Something went wrong") } })
+            .catch(err => { toast.error("Something went wrong"); setLoading(false) })
 
 
         axios.get(`${api_url}/users?populate=image`)
-            .then(res => dispatch(setAuthors(res.data)))
-            .catch(err => toast.error("Something went wrong"))
+            .then(res => { dispatch(setAuthors(res.data)); setLoading(false); })
+            .catch(err => { toast.error("Something went wrong"); setLoading(false); })
 
     }, [])
 
-    console.log(state)
+
 
 
 
@@ -72,78 +73,58 @@ const App = () => {
 
             <div className="news_page_articles">
 
-                {state.articles.length == 0 ?
+                {loading ?
+                    <Spinner
+                        color="secondary"
+                        style={{
+                            height: '3rem',
+                            width: '3rem',
+                            margin: "auto",
+                            gridColumn: "1/3",
+                            marginTop: "12rem"
+                        }}
+                    // type="grow"
+                    >
 
-                    <span className="no_articles">No Articles</span>
-
+                    </Spinner>
                     :
 
-                    <>
-                        <Col id="first_article" sm="12">
 
-                            <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
+                    state.articles.length == 0 ?
 
-                                <CardTitle onClick={() => navigate(`/newsapp/article/${state.articles[0].id}`)} tag="h5" className="max_lines1">
-                                    {state.articles[0].attributes.title}
-                                </CardTitle>
+                        <span className="no_articles">No Articles</span>
 
+                        :
 
-                                <CardText onClick={() => navigate(`/newsapp/article/${state.articles[0].id}`)} className="max_lines2">
-                                    {state.articles[0].attributes.description}
+                        <>
 
-                                </CardText>
-
-
-                                <Button size="sm" onClick={() => navigate(`/newsapp/author/${state.articles[0].attributes?.author?.data?.id}`)} color="light" className="feed_page_author_bar">
-
-                                    <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
-                                        {
-                                            state?.articles[0]?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.large?.url ? <img className="author_img_feed_page" src={`${img_url}${state.articles[0]?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.large?.url}`} />
-                                                :
-                                                <AiOutlineUser size={40} />
-                                        }
-                                        <h6 className="user_name_and_status max_lines1" style={{ margin: "0px", marginLeft: "0.5rem", padding: "0px" }}>{state.articles[0].attributes?.author?.data?.attributes?.username}</h6>
-                                    </span>
-
-                                    <span className="user_name_and_status" style={{ color: "gray" }}>{calculate_days(state.articles[0].attributes.createdAt)}</span>
-
-                                </Button>
-
-
-                            </Card>
-
-                        </Col>
-
-
-                        {state.articles.slice(1).map((v, i) =>
-
-                            <Col id="articles_half" key={i} sm="12">
+                            <Col id="first_article" sm="12">
 
                                 <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
-                                    <CardTitle onClick={() => navigate(`/newsapp/article/${v.id}`)} tag="h5" className="max_lines1">
-                                        {v.attributes.title}
+
+                                    <CardTitle onClick={() => navigate(`/newsapp/article/${state.articles[0].id}`)} tag="h5" className="max_lines1">
+                                        {state.articles[0].attributes.title}
                                     </CardTitle>
 
 
-                                    <CardText onClick={() => navigate(`/newsapp/article/${v.id}`)} className="max_lines2">
-                                        {v.attributes.description}
+                                    <CardText onClick={() => navigate(`/newsapp/article/${state.articles[0].id}`)} className="max_lines2">
+                                        {state.articles[0].attributes.description}
 
                                     </CardText>
 
 
-                                    <Button size="sm" onClick={() => navigate(`/newsapp/author/${v.attributes?.author?.data?.id}`)} color="light" className="feed_page_author_bar">
+                                    <Button size="sm" onClick={() => navigate(`/newsapp/author/${state.articles[0].attributes?.author?.data?.id}`)} color="light" className="feed_page_author_bar">
 
                                         <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
                                             {
-                                                v.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.large?.url ?
-                                                    <img className="author_img_feed_page" src={`${img_url}${v.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.large?.url}`} />
+                                                state?.articles[0]?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.large?.url ? <img className="author_img_feed_page" src={`${img_url}${state.articles[0]?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.large?.url}`} />
                                                     :
                                                     <AiOutlineUser size={40} />
                                             }
-                                            <h6 className="user_name_and_status max_lines1" style={{ margin: "0px", marginLeft: "0.25rem", padding: "0px" }}>{v.attributes?.author?.data?.attributes?.username}</h6>
+                                            <h6 className="user_name_and_status max_lines1" style={{ margin: "0px", marginLeft: "0.5rem", padding: "0px" }}>{state.articles[0].attributes?.author?.data?.attributes?.username}</h6>
                                         </span>
 
-                                        <span className="user_name_and_status" style={{ color: "gray" }}>{calculate_days(v.attributes.createdAt)}</span>
+                                        <span className="user_name_and_status" style={{ color: "gray" }}>{calculate_days(state.articles[0].attributes.createdAt)}</span>
 
                                     </Button>
 
@@ -153,22 +134,63 @@ const App = () => {
                             </Col>
 
 
+                            {state.articles.slice(1).map((v, i) =>
 
-                        )}
-                    </>
+                                <Col id="articles_half" key={i} sm="12">
+
+                                    <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
+                                        <CardTitle onClick={() => navigate(`/newsapp/article/${v.id}`)} tag="h5" className="max_lines1">
+                                            {v.attributes.title}
+                                        </CardTitle>
+
+
+                                        <CardText onClick={() => navigate(`/newsapp/article/${v.id}`)} className="max_lines2">
+                                            {v.attributes.description}
+
+                                        </CardText>
+
+
+                                        <Button size="sm" onClick={() => navigate(`/newsapp/author/${v.attributes?.author?.data?.id}`)} color="light" className="feed_page_author_bar">
+
+                                            <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
+                                                {
+                                                    v.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.large?.url ?
+                                                        <img className="author_img_feed_page" src={`${img_url}${v.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.large?.url}`} />
+                                                        :
+                                                        <AiOutlineUser size={40} />
+                                                }
+                                                <h6 className="user_name_and_status max_lines1" style={{ margin: "0px", marginLeft: "0.25rem", padding: "0px" }}>{v.attributes?.author?.data?.attributes?.username}</h6>
+                                            </span>
+
+                                            <span className="user_name_and_status" style={{ color: "gray" }}>{calculate_days(v.attributes.createdAt)}</span>
+
+                                        </Button>
+
+
+                                    </Card>
+
+                                </Col>
+
+
+
+                            )}
+
+
+
+                        </>
+
+
+
+
 
                 }
 
 
 
 
-
-
-
-
             </div>
 
-        </div>
+        </div >
     )
 
 }
