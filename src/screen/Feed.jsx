@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import { setArticles, setAuthors } from "../store/counterslice"
 import { AiOutlineUser } from "react-icons/ai"
+import ReactMarkdown from 'https://esm.sh/react-markdown@7'
 
 
 
@@ -27,7 +28,7 @@ const App = () => {
 
     useEffect(() => {
         setLoading(true)
-        axios.get(`${api_url}/news?populate=author&populate=author.image`)
+        axios.get(`${api_url}/news?populate=images&populate=author&populate=author.image`)
             .then(res => { setLoading(false); if (res.data?.data) { dispatch(setArticles(res.data?.data)) } else { toast.error("Something went wrong") } })
             .catch(err => { toast.error("Something went wrong"); setLoading(false) })
 
@@ -90,7 +91,7 @@ const App = () => {
                     :
 
 
-                    state.articles.length == 0 ?
+                    state?.articles?.length == 0 ?
 
                         <span className="no_articles">No Articles</span>
 
@@ -103,12 +104,15 @@ const App = () => {
                                 <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
 
                                     <CardTitle onClick={() => navigate(`/newsapp/article/${state.articles[0].id}`)} tag="h5" className="max_lines1">
-                                        {state.articles[0].attributes.title}
+                                        {state.articles[0]?.attributes?.title}
                                     </CardTitle>
 
 
                                     <CardText onClick={() => navigate(`/newsapp/article/${state.articles[0].id}`)} className="max_lines2">
-                                        {state.articles[0].attributes.description}
+
+                                        {/* {state.articles[0].attributes.description} */}
+
+                                        <ReactMarkdown>{state.articles[0].attributes.description}</ReactMarkdown>
 
                                     </CardText>
 
@@ -134,7 +138,7 @@ const App = () => {
                             </Col>
 
 
-                            {state.articles.slice(1).map((v, i) =>
+                            {state.articles?.slice(1).map((v, i) =>
 
                                 <Col id="articles_half" key={i} sm="12">
 
@@ -145,7 +149,9 @@ const App = () => {
 
 
                                         <CardText onClick={() => navigate(`/newsapp/article/${v.id}`)} className="max_lines2">
-                                            {v.attributes.description}
+
+                                            <ReactMarkdown>{v.attributes.description}</ReactMarkdown>
+
 
                                         </CardText>
 

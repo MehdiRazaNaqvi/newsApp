@@ -4,10 +4,13 @@ import { Row, Col, Card, CardText, CardTitle, Button } from "reactstrap"
 import { AiOutlineUser } from "react-icons/ai"
 
 
+
+
 import Navbar from "../components/navbar"
 import { useNavigate, useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { img_url } from "../config/api"
+import ReactMarkdown from 'https://esm.sh/react-markdown@7'
 
 const App = () => {
 
@@ -42,10 +45,10 @@ const App = () => {
 
             <Navbar />
 
-
+        
             <div className="article_display_base" >
 
-                <h2 style={{ width: "100%" }} className="article_heading">{article?.attributes?.title}</h2>
+                <h2 style={{ width: "100%" }} className="article_heading"> {article?.attributes?.title}</h2>
 
                 <span className="author_info_bar_article_page">
 
@@ -68,9 +71,37 @@ const App = () => {
 
 
                 </span>
+                {article?.attributes?.images?.data &&
+                    <span className="article_image_display">
 
+                        {article?.attributes?.images?.data?.map((v, i) =>
+
+                            v?.attributes?.formats?.large?.url ?
+                                < img key={i} className="article_img" src={`${img_url}${v?.attributes?.formats?.large?.url}`} />
+                                :
+                                v?.attributes?.formats?.medium?.url ?
+                                    < img key={i} className="article_img" src={`${img_url}${v?.attributes?.formats?.medium?.url}`} />
+                                    :
+                                    v?.attributes?.formats?.small?.url ?
+                                        < img key={i} className="article_img" src={`${img_url}${v?.attributes?.formats?.small?.url}`} />
+                                        :
+                                        v?.attributes?.formats?.thumbnail?.url ?
+                                            < img key={i} className="article_img" src={`${img_url}${v?.attributes?.formats?.thumbnail?.url}`} />
+                                            :
+                                            null
+                        )}
+
+
+                    </span>
+
+                }
                 <p className="article_text" style={{ margin: "0px", padding: "0px", width: "100%" }}>
-                    {article?.attributes?.description}
+
+
+
+                    <ReactMarkdown className="article_text">{article?.attributes?.description}</ReactMarkdown>
+
+
                 </p>
             </div>
 

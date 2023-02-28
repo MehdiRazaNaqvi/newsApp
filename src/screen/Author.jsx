@@ -10,6 +10,9 @@ import { useSelector } from "react-redux"
 import { img_url } from "../config/api"
 import { AiOutlineUser } from "react-icons/ai"
 
+import ReactMarkdown from 'https://esm.sh/react-markdown@7'
+
+
 
 
 const App = () => {
@@ -100,7 +103,9 @@ const App = () => {
 
 
                                 <CardText onClick={() => navigate(`/newsapp/article/${v.id}`)} className="max_lines2">
-                                    {v.attributes?.description}
+
+                                    <ReactMarkdown className="max_lines2">{v.attributes?.description}</ReactMarkdown>
+
 
                                 </CardText>
 

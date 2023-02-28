@@ -62,6 +62,24 @@
 
 
 
+.article_image_display{
+
+        width: 100%;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+
+
+.article_img{
+    width: 100%;
+    height: 30rem;
+}
+
 
 
 
