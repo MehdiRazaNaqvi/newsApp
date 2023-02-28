@@ -36,14 +36,14 @@ function Example() {
 
 
 
-        <div style={{ width: "100%" }}>
+        <div style={{ width: "100%" , backgroundColor:"red" }}>
             <Navbar color="light" style={{ width: "100%" }} light>
 
-                <NavbarBrand className="me-auto max_lines1" style={{ margin: "0px", padding: "0px", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <NavbarBrand onClick={() => navigate("/newsapp")} className="me-auto max_lines1" style={{ margin: "0px", padding: "0px", display: "flex", alignItems: "center", gap: "0.5rem" }}>
                     {/* {pic ? */}
 
                     {/* <img className='author_img_feed_page' style={{ marginRight: "1rem" }} src={`${img_url}${pic}`} /> */}
-                    
+
                     <img className='' style={{ marginRight: "0.2rem" }} src="https://img.icons8.com/ios/50/null/apple-news.png" />
                     {/* : */}
                     {/* <MdArticle size={40} /> */}
@@ -63,7 +63,7 @@ function Example() {
                         {/* onClick={() => { dispatch(logout()); navigate("/newsapp") }} */}
                         <NavItem onClick={() => navigate("/newsapp")}>
                             <NavLink>
-                               News Feed
+                                News Feed
                             </NavLink>
                         </NavItem>
                     </Nav>

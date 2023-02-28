@@ -10,7 +10,9 @@ import { useSelector } from "react-redux"
 import { img_url } from "../config/api"
 import { AiOutlineUser } from "react-icons/ai"
 
-import ReactMarkdown from 'https://esm.sh/react-markdown@7'
+// import ReactMarkdown from 'https://esm.sh/react-markdown@7'
+
+import ReactMarkdown from 'react-markdown'
 
 
 
@@ -23,11 +25,11 @@ const App = () => {
 
     const navigate = useNavigate()
     const state = useSelector(state => state.counter)
-    const user = state.users.filter(v => v.id == id)[0]
-    const articles = state.articles.filter(v => v.attributes?.author?.data?.id == id)
+    const user = state?.users?.filter(v => v.id == id)[0]
+    const articles = state?.articles?.filter(v => v.attributes?.author?.data?.id == id)
 
 
-    console.log(user)
+
 
     const dateConvert = (dateString) => {
         const date = new Date(dateString);
@@ -57,8 +59,11 @@ const App = () => {
         // const days = Math.floor(timeDifference / 24*60*60*1000);
         const days = Math.floor(timeDifference / (24 * 60 * 60 * 1000));
         // console.log(`${days}`);
-        if (days == 0) { return ("today") }
+        if (days >= 0) { return ("Today") }
 
+        else if (days == 1) {
+            return (`Yesterday`)
+        }
         else {
             return (`${days} days ago`)
         }
@@ -76,10 +81,26 @@ const App = () => {
 
             <div className="article_display_base">
                 {
-                    user.image?.formats?.large?.url ?
-                        <img className="author_profile_pic" src={`${img_url}${user.image?.formats?.large?.url}`} />
+                    user?.image?.formats?.large?.url ?
+                        <img className="author_profile_pic" src={`${img_url}${user?.image?.formats?.large?.url}`} />
                         :
-                        <AiOutlineUser size={100} />
+
+                        user?.image?.formats?.medium?.url ?
+                            <img className="author_profile_pic" src={`${img_url}${user?.image?.formats?.medium?.url}`} />
+                            :
+
+
+                            user?.image?.formats?.small?.url ?
+                                <img className="author_profile_pic" src={`${img_url}${user?.image?.formats?.small?.url}`} />
+                                :
+
+
+                                user?.image?.formats?.thumbnail?.url ?
+                                    <img className="author_profile_pic" src={`${img_url}${user?.image?.formats?.thumbnail?.url}`} />
+                                    :
+
+
+                                    <AiOutlineUser size={100} />
 
                 }
                 <span className="author_profile_info">
@@ -92,7 +113,8 @@ const App = () => {
                 <div className="author_articles_base">
 
 
-                    {articles.map((v, i) =>
+                    {articles?.map((v, i) =>
+
                         <Col sm="12">
 
                             <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>

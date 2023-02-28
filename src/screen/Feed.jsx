@@ -1,6 +1,6 @@
 import "../style/feed.css"
 
-import { Row, Col, Card, CardText, CardTitle, Button, Spinner } from "reactstrap"
+import { Row, Col, Card, CardText, CardTitle, Button, Spinner, Placeholder, Progress } from "reactstrap"
 
 
 import Navbar from "../components/navbar"
@@ -12,7 +12,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import { setArticles, setAuthors } from "../store/counterslice"
 import { AiOutlineUser } from "react-icons/ai"
-import ReactMarkdown from 'https://esm.sh/react-markdown@7'
+// import ReactMarkdown from 'https://esm.sh/react-markdown@7'
+import ReactMarkdown from 'react-markdown'
+
 
 
 
@@ -25,6 +27,8 @@ const App = () => {
     const state = useSelector(state => state.counter)
 
     const [loading, setLoading] = useState(false)
+
+
 
     useEffect(() => {
         setLoading(true)
@@ -57,9 +61,12 @@ const App = () => {
         // const hours = Math.floor(minutes / 60);
         // const days = Math.floor(timeDifference / 24*60*60*1000);
         const days = Math.floor(timeDifference / (24 * 60 * 60 * 1000));
-        // console.log(`${days}`);
-        if (days == 0) { return ("today") }
 
+        if (days >= 0) { return ("Today") }
+
+        else if (days == 1) {
+            return (`Yesterday`)
+        }
         else {
             return (`${days} days ago`)
         }
@@ -68,26 +75,163 @@ const App = () => {
     return (
 
 
-        <div className="news_page_base">
+        < div className="news_page_base" >
 
             <Navbar />
 
             <div className="news_page_articles">
 
                 {loading ?
-                    <Spinner
-                        color="secondary"
-                        style={{
-                            height: '3rem',
-                            width: '3rem',
-                            margin: "auto",
-                            gridColumn: "1/3",
-                            marginTop: "12rem"
-                        }}
-                    // type="grow"
-                    >
 
-                    </Spinner>
+                    <>
+                        <Col id="first_article" sm="12">
+
+                            <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
+
+                                <CardTitle tag="h5" className="max_lines1">
+                                    <Progress
+                                        // animated
+                                        color="light"
+                                        className="my-3"
+                                        value={100}
+                                    />
+
+
+                                </CardTitle>
+
+
+                                <CardText className="max_lines2">
+
+
+                                    <Progress
+
+                                        color="light"
+                                        className="my-3"
+                                        value={100}
+                                    />
+                                    <Progress
+
+                                        color="light"
+                                        className="my-3"
+                                        value={100}
+                                    />
+
+                                </CardText>
+
+
+
+                                <Progress
+
+                                    color="light"
+                                    className="my-3"
+                                    value={100}
+                                />
+
+                            </Card>
+
+                        </Col>
+
+
+                        <Col id="articles_half" sm="12">
+
+                            <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
+
+                                <CardTitle tag="h5" className="max_lines1">
+                                    <Progress
+                                        // animated
+                                        color="light"
+                                        className="my-3"
+                                        value={100}
+                                    />
+                                </CardTitle>
+
+
+                                <CardText className="max_lines2">
+
+
+
+                                    <Progress
+                                        // animated
+                                        color="light"
+                                        className="my-3"
+                                        value={100}
+                                    />
+                                    <Progress
+                                        // animated
+                                        color="light"
+                                        className="my-3"
+                                        value={100}
+                                    />
+
+
+                                </CardText>
+
+
+
+                                <Progress
+
+                                    color="light"
+                                    className="my-3"
+                                    value={100}
+                                />
+
+                            </Card>
+
+                        </Col>
+
+                        <Col id="articles_half" sm="12">
+
+                            <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
+
+                                <CardTitle tag="h5" className="max_lines1">
+                                    <Progress
+                                        // animated
+                                        color="light"
+                                        className="my-3"
+                                        value={100}
+                                    />
+                                </CardTitle>
+
+
+                                <CardText className="max_lines2">
+
+
+
+                                    <Progress
+                                        // animated
+                                        color="light"
+                                        className="my-3"
+                                        value={100}
+                                    />
+                                    <Progress
+                                        // animated
+                                        color="light"
+                                        className="my-3"
+                                        value={100}
+                                    />
+
+
+                                </CardText>
+
+
+
+                                <Progress
+
+                                    color="light"
+                                    className="my-3"
+                                    value={100}
+                                />
+
+                            </Card>
+
+                        </Col>
+
+
+
+                    </>
+
+
+
                     :
 
 
@@ -104,7 +248,7 @@ const App = () => {
                                 <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
 
                                     <CardTitle onClick={() => navigate(`/newsapp/article/${state.articles[0].id}`)} tag="h5" className="max_lines1">
-                                        {state.articles[0]?.attributes?.title}
+                                        {state?.articles[0]?.attributes?.title}
                                     </CardTitle>
 
 
@@ -112,7 +256,7 @@ const App = () => {
 
                                         {/* {state.articles[0].attributes.description} */}
 
-                                        <ReactMarkdown>{state.articles[0].attributes.description}</ReactMarkdown>
+                                        <ReactMarkdown>{state?.articles[0]?.attributes?.description}</ReactMarkdown>
 
                                     </CardText>
 
@@ -138,19 +282,20 @@ const App = () => {
                             </Col>
 
 
-                            {state.articles?.slice(1).map((v, i) =>
+                            {state?.articles?.slice(1).map((v, i) =>
 
                                 <Col id="articles_half" key={i} sm="12">
 
                                     <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
+
                                         <CardTitle onClick={() => navigate(`/newsapp/article/${v.id}`)} tag="h5" className="max_lines1">
-                                            {v.attributes.title}
+                                            {v?.attributes?.title}
                                         </CardTitle>
 
 
                                         <CardText onClick={() => navigate(`/newsapp/article/${v.id}`)} className="max_lines2">
 
-                                            <ReactMarkdown>{v.attributes.description}</ReactMarkdown>
+                                            <ReactMarkdown>{v?.attributes?.description}</ReactMarkdown>
 
 
                                         </CardText>
