@@ -47,7 +47,7 @@ const App = () => {
 
 
 
-   
+
 
 
     const calculate_days = (date) => {
@@ -85,9 +85,9 @@ const App = () => {
                 {loading ?
 
                     <>
-                        <Col id="first_article" sm="12">
+                        <Col id="first_article" sm="12" style={{ width: "100%" }}>
 
-                            <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
+                            <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center", width: "100%" }} body>
 
                                 <CardTitle tag="h5" className="max_lines1">
                                     <Progress
@@ -133,7 +133,7 @@ const App = () => {
                         </Col>
 
 
-                        <Col id="articles_half" sm="12">
+                        <Col id="articles_half" sm="12" style={{ width: "100%" }}>
 
                             <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
 
@@ -180,7 +180,7 @@ const App = () => {
 
                         </Col>
 
-                        <Col id="articles_half" sm="12">
+                        <Col id="articles_half" sm="12" style={{ width: "100%" }}>
 
                             <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
 
@@ -230,8 +230,6 @@ const App = () => {
 
 
                     </>
-
-
 
                     :
 

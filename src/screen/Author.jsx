@@ -79,7 +79,7 @@ const App = () => {
             <Navbar />
 
 
-            <div className="article_display_base" style={{ marginBottom:"5rem"}}>
+            <div className="article_display_base" style={{ marginBottom: "5rem" }}>
                 {
                     user?.image?.formats?.large?.url ?
                         <span style={{ width: "12rem", height: "12rem", border: "2px solid lightgray", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -94,6 +94,7 @@ const App = () => {
                             <span style={{ width: "12rem", height: "12rem", border: "2px solid lightgray", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
 
                                 <img className="author_profile_pic" src={`${img_url}${user?.image?.formats?.medium?.url}`} />
+
                             </span>
 
                             :
@@ -122,10 +123,12 @@ const App = () => {
                                     </span>
 
                 }
-                <span className="author_profile_info">
+                <span className="author_profile_info" style={{gap:"1rem" , height:"15rem" }}>
 
                     <span className="author_profile_name max_lines1">{user?.username}</span>
-                    <span className="author_profile_email max_lines1">{user?.email}</span>
+                    {/* <span className="author_profile_email max_lines1">{user?.email}</span> */}
+                    <span className="author_profile_email max_lines1 articles_length">{articles?.length}</span>
+                    <span className="author_profile_email max_lines1">articles</span>
                 </span>
 
 
@@ -134,7 +137,7 @@ const App = () => {
 
                     {articles?.map((v, i) =>
 
-                        <Col sm="12">
+                        <Col sm="12" style={{ width: "100%" }}>
 
                             <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
 
