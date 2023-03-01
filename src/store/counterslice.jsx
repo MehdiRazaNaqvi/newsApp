@@ -56,8 +56,10 @@ export const counterSlice = createSlice({
 
     setArticles: (state, action) => {
 
-      state.articles = [...action.payload].reverse()
-    // const reversed = [...state.articles].reverse()
+      state.articles = [...action.payload.data].reverse()
+      // const reversed = [...state.articles].reverse()
+      action.payload.cb()
+
 
 
     },
@@ -65,7 +67,8 @@ export const counterSlice = createSlice({
 
     setAuthors: (state, action) => {
 
-      state.users = action.payload
+      state.users = action.payload.data
+      action.payload.cb()
 
     },
 

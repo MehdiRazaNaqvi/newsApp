@@ -33,12 +33,12 @@ const App = () => {
     useEffect(() => {
         setLoading(true)
         axios.get(`${api_url}/news?populate=images&populate=author&populate=author.image`)
-            .then(res => { setLoading(false); if (res.data?.data) { dispatch(setArticles(res.data?.data)) } else { toast.error("Something went wrong") } })
+            .then(res => { setLoading(false); if (res.data?.data) { dispatch(setArticles({ data: res.data?.data, cb: () => { } })) } else { toast.error("Something went wrong") } })
             .catch(err => { toast.error("Something went wrong"); setLoading(false) })
 
 
         axios.get(`${api_url}/users?populate=image`)
-            .then(res => { dispatch(setAuthors(res.data)); setLoading(false); })
+            .then(res => { dispatch(setAuthors({ data: res.data, cb: () => { } })); setLoading(false); })
             .catch(err => { toast.error("Something went wrong"); setLoading(false); })
 
     }, [])
@@ -242,16 +242,16 @@ const App = () => {
 
                         <>
 
-                            <Col id="first_article" sm="12">
+                            <Col id="first_article" sm="12" style={{ width: "100%" }}>
 
                                 <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
 
-                                    <CardTitle onClick={() => navigate(`/newsapp/article/${state.articles[0].id}`)} tag="h5" className="max_lines1">
+                                    <CardTitle onClick={() => navigate(`/newsapp/article/${state.articles[0].id}/${state?.articles[0]?.attributes?.title}`)} tag="h5" className="max_lines1">
                                         {state?.articles[0]?.attributes?.title}
                                     </CardTitle>
 
 
-                                    <CardText onClick={() => navigate(`/newsapp/article/${state.articles[0].id}`)} className="max_lines2">
+                                    <CardText onClick={() => navigate(`/newsapp/article/${state.articles[0].id}/${state?.articles[0]?.attributes?.title}`)} className="max_lines2">
 
                                         {/* {state.articles[0].attributes.description} */}
 
@@ -294,18 +294,18 @@ const App = () => {
                             </Col>
 
 
-                            {state?.articles?.slice(1).map((v, i) =>
+                            {state?.articles?.slice(1)?.map((v, i) =>
 
-                                <Col id="articles_half" key={i} sm="12">
+                                <Col id="articles_half" key={i} sm="12" style={{ width: "100%" }}>
 
                                     <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
 
-                                        <CardTitle onClick={() => navigate(`/newsapp/article/${v.id}`)} tag="h5" className="max_lines1">
+                                        <CardTitle onClick={() => navigate(`/newsapp/article/${v?.id}/${v?.attributes?.title}`)} tag="h5" className="max_lines1">
                                             {v?.attributes?.title}
                                         </CardTitle>
 
 
-                                        <CardText onClick={() => navigate(`/newsapp/article/${v.id}`)} className="max_lines2">
+                                        <CardText onClick={() => navigate(`/newsapp/article/${v?.id}/${v?.attributes?.title}`)} className="max_lines2">
 
                                             <ReactMarkdown>{v?.attributes?.description}</ReactMarkdown>
 
@@ -333,8 +333,6 @@ const App = () => {
                                     </Card>
 
                                 </Col>
-
-
 
                             )}
 

@@ -62,9 +62,9 @@
 
 
 
-.article_image_display{
+.article_image_display {
 
-        width: 100%;
+    width: 100%;
     height: min-content;
     display: flex;
     flex-direction: column;
@@ -75,7 +75,7 @@
 
 
 
-.article_img{
+.article_img {
     width: 100%;
     height: 30rem;
 }
@@ -93,9 +93,35 @@
 
     }
 
+    .article_img {
+        width: 100%;
+        height: 25rem;
+    }
 
-    
+
+
+
 }
+
+
+
+
+
+
+@media only screen and (max-width: 800px) {
+    .article_display_base {
+        width: 95%;
+
+    }
+
+    .article_img {
+        width: 100%;
+        height: 20rem;
+    }
+
+}
+
+
 
 
 
@@ -105,9 +131,11 @@
 
     }
 
+    .article_img {
+        width: 100%;
+        height: 15rem;
+    }
 
-   
+
+
 }
-
-
-
