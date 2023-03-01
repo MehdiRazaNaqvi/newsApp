@@ -115,9 +115,9 @@ const App = () => {
                                                 article?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.thumbnail?.url ?
                                                     <img className="author_img_feed_page" src={`${img_url}${article?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.thumbnail?.url}`} />
                                                     :
-                                                    <AiOutlineUser size={40} />
+                                                    <AiOutlineUser size={30} />
                                 }
-                                <h6 style={{ margin: "0px", pading: "0px", marginLeft: "1rem" }}>{article?.attributes?.author?.data?.attributes?.username}</h6>
+                                <h6 style={{ margin: "0px", pading: "0px", marginLeft: "0.3rem" }}>{article?.attributes?.author?.data?.attributes?.username}</h6>
                             </span>
 
                             <span style={{ color: "gray" }}>{dateConvert(article?.attributes?.createdAt)}</span>
