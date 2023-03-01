@@ -249,12 +249,12 @@ const App = () => {
 
                                 <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
 
-                                    <CardTitle onClick={() => navigate(`/newsapp/article/${v?.id}/${v?.attributes?.title}`)} tag="h5" className="max_lines1">
+                                    <CardTitle onClick={() => navigate(`/newsapp/article/${v?.id}/${v?.attributes?.title?.replace(/\s+/g, '-')}`)} tag="h5" className="max_lines1">
                                         {v.attributes?.title}
                                     </CardTitle>
 
 
-                                    <CardText onClick={() => navigate(`/newsapp/article/${v?.id}/${v?.attributes?.title}`)} className="max_lines2">
+                                    <CardText onClick={() => navigate(`/newsapp/article/${v?.id}/${v?.attributes?.title?.replace(/\s+/g, '-')}`)} className="max_lines2">
 
                                         <ReactMarkdown className="max_lines2">{v.attributes?.description}</ReactMarkdown>
 
