@@ -47,6 +47,7 @@ const App = () => {
 
 
 
+   
 
 
     const calculate_days = (date) => {
@@ -79,7 +80,7 @@ const App = () => {
 
             <Navbar />
 
-            <div className="news_page_articles" style={{ marginBottom:"5rem"}}>
+            <div className="news_page_articles" style={{ marginBottom: "5rem" }}>
 
                 {loading ?
 
