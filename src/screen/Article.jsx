@@ -117,7 +117,7 @@ const App = () => {
                                                     :
                                                     <AiOutlineUser size={30} />
                                 }
-                                <h6 style={{ margin: "0px", pading: "0px", marginLeft: "0.3rem" }}>{article?.attributes?.author?.data?.attributes?.username}</h6>
+                                <h6 style={{ margin: "0px", pading: "0px" }}>{article?.attributes?.author?.data?.attributes?.username}</h6>
                             </span>
 
                             <span style={{ color: "gray" }}>{dateConvert(article?.attributes?.createdAt)}</span>
@@ -152,10 +152,7 @@ const App = () => {
                     }
                     <p className="article_text" style={{ margin: "0px", padding: "0px", width: "100%" }}>
 
-
-
                         <ReactMarkdown className="article_text">{article?.attributes?.description}</ReactMarkdown>
-
 
                     </p>
                 </div>
