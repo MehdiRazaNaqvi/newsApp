@@ -79,7 +79,7 @@ const App = () => {
 
             <Navbar />
 
-            <div className="news_page_articles">
+            <div className="news_page_articles" style={{ marginBottom:"5rem"}}>
 
                 {loading ?
 
@@ -265,9 +265,22 @@ const App = () => {
 
                                         <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
                                             {
-                                                state?.articles[0]?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.large?.url ? <img className="author_img_feed_page" src={`${img_url}${state.articles[0]?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.large?.url}`} />
+                                                state?.articles[0]?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.large?.url ?
+                                                    <img className="author_img_feed_page" src={`${img_url}${state.articles[0]?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.large?.url}`} />
                                                     :
-                                                    <AiOutlineUser size={40} />
+
+                                                    state?.articles[0]?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.medium?.url ?
+                                                        <img className="author_img_feed_page" src={`${img_url}${state.articles[0]?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.medium?.url}`} />
+                                                        :
+
+                                                        state?.articles[0]?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.small?.url ?
+                                                            <img className="author_img_feed_page" src={`${img_url}${state.articles[0]?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.small?.url}`} />
+                                                            :
+
+                                                            state?.articles[0]?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.thumbnail?.url ?
+                                                                <img className="author_img_feed_page" src={`${img_url}${state.articles[0]?.attributes?.author?.data?.attributes?.image?.data?.attributes?.formats?.thumbnail?.url}`} />
+                                                                :
+                                                                <AiOutlineUser size={40} />
                                             }
                                             <h6 className="user_name_and_status max_lines1" style={{ margin: "0px", marginLeft: "0.5rem", padding: "0px" }}>{state.articles[0].attributes?.author?.data?.attributes?.username}</h6>
                                         </span>

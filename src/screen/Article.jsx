@@ -49,7 +49,7 @@ const App = () => {
             <Navbar />
 
 
-            <div className="article_display_base" >
+            <div className="article_display_base" style={{ marginBottom:"5rem"}} >
 
                 <h2 style={{ width: "100%" }} className="article_heading"> {article?.attributes?.title}</h2>
 

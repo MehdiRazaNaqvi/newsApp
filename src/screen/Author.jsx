@@ -79,28 +79,47 @@ const App = () => {
             <Navbar />
 
 
-            <div className="article_display_base">
+            <div className="article_display_base" style={{ marginBottom:"5rem"}}>
                 {
                     user?.image?.formats?.large?.url ?
-                        <img className="author_profile_pic" src={`${img_url}${user?.image?.formats?.large?.url}`} />
+                        <span style={{ width: "12rem", height: "12rem", border: "2px solid lightgray", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+
+
+                            <img className="author_profile_pic" src={`${img_url}${user?.image?.formats?.large?.url}`} />
+
+                        </span>
                         :
 
                         user?.image?.formats?.medium?.url ?
-                            <img className="author_profile_pic" src={`${img_url}${user?.image?.formats?.medium?.url}`} />
+                            <span style={{ width: "12rem", height: "12rem", border: "2px solid lightgray", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+
+                                <img className="author_profile_pic" src={`${img_url}${user?.image?.formats?.medium?.url}`} />
+                            </span>
+
                             :
 
 
                             user?.image?.formats?.small?.url ?
-                                <img className="author_profile_pic" src={`${img_url}${user?.image?.formats?.small?.url}`} />
+                                <span style={{ width: "12rem", height: "12rem", border: "2px solid lightgray", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+
+                                    <img className="author_profile_pic" src={`${img_url}${user?.image?.formats?.small?.url}`} />
+                                </span>
+
                                 :
 
 
                                 user?.image?.formats?.thumbnail?.url ?
-                                    <img className="author_profile_pic" src={`${img_url}${user?.image?.formats?.thumbnail?.url}`} />
+                                    <span style={{ width: "12rem", height: "12rem", border: "2px solid lightgray", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+
+                                        <img className="author_profile_pic" src={`${img_url}${user?.image?.formats?.thumbnail?.url}`} />
+                                    </span>
+
                                     :
 
+                                    <span style={{ width: "12rem", height: "12rem", border: "2px solid lightgray", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
 
-                                    <AiOutlineUser size={100} />
+                                        <AiOutlineUser size={100} />
+                                    </span>
 
                 }
                 <span className="author_profile_info">
