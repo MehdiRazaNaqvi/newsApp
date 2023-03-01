@@ -120,8 +120,11 @@
 
 
 
+.article_text , .article_heading{
 
+    word-wrap: break-word;
 
+}
 
 
 

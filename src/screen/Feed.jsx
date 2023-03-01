@@ -254,7 +254,6 @@ const App = () => {
                                     <CardText onClick={() => navigate(`/newsapp/article/${state.articles[0].id}/${state?.articles[0]?.attributes?.title?.replace(/\s+/g, '-')}`)} className="max_lines2">
 
                                         {/* {state.articles[0].attributes.description} */}
-
                                         <ReactMarkdown>{state?.articles[0]?.attributes?.description}</ReactMarkdown>
 
                                     </CardText>

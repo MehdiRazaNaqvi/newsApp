@@ -117,7 +117,7 @@ const App = () => {
                                                     :
                                                     <AiOutlineUser size={30} />
                                 }
-                                <h6 style={{ margin: "0px", pading: "0px" }}>{article?.attributes?.author?.data?.attributes?.username}</h6>
+                                <h6 style={{ margin: "0px", pading: "0px", fontSize: "1.1rem" }}>{article?.attributes?.author?.data?.attributes?.username}</h6>
                             </span>
 
                             <span style={{ color: "gray" }}>{dateConvert(article?.attributes?.createdAt)}</span>

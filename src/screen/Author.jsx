@@ -236,7 +236,7 @@ const App = () => {
                         <span className="author_profile_name max_lines1">{user?.username}</span>
                         {/* <span className="author_profile_email max_lines1">{user?.email}</span> */}
                         <span className="author_profile_email max_lines1 articles_length">{articles?.length}</span>
-                        <span className="author_profile_email max_lines1">Articles</span>
+                        <span className="author_profile_email max_lines1">{articles.length <= 1 ? "Article" : "Articles"}</span>
                     </span>
 
 
