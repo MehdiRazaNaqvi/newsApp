@@ -237,6 +237,7 @@ const App = () => {
                         {/* <span className="author_profile_email max_lines1">{user?.email}</span> */}
                         <span className="author_profile_email max_lines1 articles_length">{articles?.length}</span>
                         <span className="author_profile_email max_lines1">{articles.length <= 1 ? "Article" : "Articles"}</span>
+
                     </span>
 
 
@@ -245,7 +246,7 @@ const App = () => {
 
                         {articles?.map((v, i) =>
 
-                            <Col sm="12" style={{ width: "100%" }}>
+                            <Col sm="12" style={{ width: "100%"}}>
 
                                 <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
 

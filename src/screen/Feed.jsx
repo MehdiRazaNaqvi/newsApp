@@ -46,7 +46,7 @@ const App = () => {
 
 
 
-
+    console.log(state.articles)
 
 
 
@@ -295,7 +295,7 @@ const App = () => {
 
                             {state?.articles?.slice(1)?.map((v, i) =>
 
-                                <Col id="articles_half" key={i} sm="12" style={{ width: "100%" }}>
+                                <Col id="articles_half" key={i} sm="12" style={{ width: "100%"}}>
 
                                     <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
 
