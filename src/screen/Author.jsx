@@ -65,7 +65,7 @@ const App = () => {
         // const days = Math.floor(timeDifference / 24*60*60*1000);
         const days = Math.floor(timeDifference / (24 * 60 * 60 * 1000));
         // console.log(`${days}`);
-        if (days >= 0) { return ("Today") }
+        if (days >= 0 && days < 1) { return ("Today") }
 
         else if (days == 1) {
             return (`Yesterday`)
@@ -246,7 +246,7 @@ const App = () => {
 
                         {articles?.map((v, i) =>
 
-                            <Col sm="12" style={{ width: "100%"}}>
+                            <Col sm="12" style={{ width: "100%" }}>
 
                                 <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
 
