@@ -57,7 +57,20 @@
 .articles_length {
     font-size: 6.5rem;
     color: gray;
+
 }
+
+
+
+.news_card_heading {
+
+    height: min-content;
+    min-height: 3rem;
+    font-size: 1.3rem;
+
+}
+
+
 
 
 

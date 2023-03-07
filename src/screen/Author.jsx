@@ -250,7 +250,7 @@ const App = () => {
 
                                 <Card style={{ height: "15rem", display: "flex", flexDirection: "column", gap: "1rem", justifyContent: "center" }} body>
 
-                                    <CardTitle onClick={() => navigate(`/newsapp/article/${v?.id}/${v?.attributes?.title?.replace(/\s+/g, '-')}`)} tag="h5" className="max_lines1">
+                                    <CardTitle onClick={() => navigate(`/newsapp/article/${v?.id}/${v?.attributes?.title?.replace(/\s+/g, '-')}`)} tag="h3" className="max_lines1 news_card_heading">
                                         {v.attributes?.title}
                                     </CardTitle>
 
