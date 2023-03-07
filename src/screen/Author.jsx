@@ -257,20 +257,20 @@ const App = () => {
 
                                     <CardText onClick={() => navigate(`/newsapp/article/${v?.id}/${v?.attributes?.title?.replace(/\s+/g, '-')}`)} className="max_lines2">
 
-                                        <ReactMarkdown className="max_lines2">{v.attributes?.description}</ReactMarkdown>
+                                        <ReactMarkdown className="max_lines2">{v?.attributes?.description}</ReactMarkdown>
 
 
                                     </CardText>
 
 
-                                    <Button size="md" onClick={() => navigate(`/newsapp/author/${v.attributes?.author?.data?.id}`)} color="light" className="feed_page_author_bar">
+                                    <Button size="md" onClick={() => navigate(`/newsapp/author/${v?.attributes?.author?.data?.id}`)} color="light" className="feed_page_author_bar">
                                         {/* 
                                 <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
                                     <img className="author_img_feed_page" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSaQlO7ukqmBVlJd_ToyW9nDJXU8UCmpCjGYjhK79PIA&s" alt="" />
                                     <h6>{state.articles[0].attributes?.author?.data?.attributes?.username}</h6>
                                 </span> */}
 
-                                        <span style={{ color: "gray", width: "100%" }}>{calculate_days(state.articles[0].attributes.createdAt)}</span>
+                                        <span style={{ color: "gray", width: "100%" }}>{calculate_days(v?.attributes?.createdAt)}</span>
 
                                     </Button>
 
